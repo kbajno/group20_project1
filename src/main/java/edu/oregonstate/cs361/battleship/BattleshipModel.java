@@ -1,52 +1,15 @@
 package edu.oregonstate.cs361.battleship;
 
 /**
- * Created by michaelhilton on 1/26/17.
+ * Skeleton created by michaelhilton on 1/26/17.
+ * Fleshed out by leian7 on 1/28/17.
  */
-
-/* class Ship {
-    String name;
-    int length;
-    GridSquare start;
-    GridSquare end;
-
-    // Constructor: initializes name and length
-    Ship(String name, int length) {
-        this.name = name;
-        this.length = length;
-    } */
-
-/*    String get_ship_name() {
-        return this.name;
-    }
-
-    GridSquare get_start_square() {
-        return this.start;
-    }
-
-    GridSquare get_end_square() {
-        return this.end;
-    } */
-
-
 public class BattleshipModel {
 
+    // Represents a specific square on the game board.
     public class GridSquare {
         int Across;
         int Down;
-
-        /* GridSquare(int Across, int Down) {
-            this.Across = Across;
-            this.Down = Down;
-        } */
-
-        int get_across() {
-            return this.Across;
-        }
-
-        int get_down() {
-            return this.Down;
-        }
     }
 
     public class Ship {
@@ -59,8 +22,8 @@ public class BattleshipModel {
         Ship(String name, int length) {
             this.name = name;
             this.length = length;
-            this.start = new GridSquare();
-            this.end = new GridSquare();
+            this.start = new GridSquare();  // ship head
+            this.end = new GridSquare();    // ship butt
         }
     }
 
@@ -78,7 +41,8 @@ public class BattleshipModel {
     Ship computer_destroyer;
     Ship computer_submarine;
 
-    // Game stats:
+    /* Game stats: Can be populated as 2D array like {{x, y}, ...}, or can
+    simply hold a list of relevant GridSquare objects */
     int[] playerHits;
     int[] playerMisses;
     int[] computerHits;
