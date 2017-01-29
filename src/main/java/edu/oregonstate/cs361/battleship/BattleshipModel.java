@@ -3,5 +3,95 @@ package edu.oregonstate.cs361.battleship;
 /**
  * Created by michaelhilton on 1/26/17.
  */
+
+/* class Ship {
+    String name;
+    int length;
+    GridSquare start;
+    GridSquare end;
+
+    // Constructor: initializes name and length
+    Ship(String name, int length) {
+        this.name = name;
+        this.length = length;
+    } */
+
+/*    String get_ship_name() {
+        return this.name;
+    }
+
+    GridSquare get_start_square() {
+        return this.start;
+    }
+
+    GridSquare get_end_square() {
+        return this.end;
+    } */
+}
+
 public class BattleshipModel {
+
+    private class GridSquare {
+        int Across;
+        int Down;
+
+        /* GridSquare(int Across, int Down) {
+            this.Across = Across;
+            this.Down = Down;
+        } */
+
+        int[] get_coordinate_pair {
+            return [Across, Down];
+        }
+    }
+
+    private class Ship {
+        String name;
+        int length;
+        GridSquare start;
+        GridSquare end;
+
+        // Constructor: initializes name and length
+        Ship(String name, int length) {
+            this.name = name;
+            this.length = length;
+            this.start = new GridSquare();
+            this.end = new GridSquare();
+        }
+    }
+
+    // User's ships:
+    Ship aircraftCarrier;
+    Ship battleship;
+    Ship cruiser;
+    Ship destroyer;
+    Ship submarine;
+
+    // AI's ships:
+    Ship computer_aircraftCarrier;
+    Ship computer_battleship;
+    Ship computer_cruiser;
+    Ship computer_destroyer;
+    Ship computer_submarine;
+
+    // Game stats:
+    int[] playerHits;
+    int[] playerMisses;
+    int[] computerHits;
+    int[] computerMisses;
+
+    // Constructor: Creates each ship and initializes their names and lengths
+    BattleshipModel() {
+        this.aircraftCarrier = new Ship("AircraftCarrier", 5);
+        this.battleship = new Ship("Battleship", 4);
+        this.cruiser = new Ship("Cruiser", 3);
+        this.destroyer = new Ship("Destroyer", 2);
+        this.submarine = new Ship("Submarine", 2);
+
+        this.computer_aircraftCarrier = new Ship("Computer_AircraftCarrier", 5);
+        this.computer_battleship = new Ship("Computer_Battleship", 4);
+        this.computer_cruiser = new Ship("Computer_Cruiser", 3);
+        this.computer_destroyer = new Ship("Computer_Destroyer", 2);
+        this.computer_submarine = new Ship("Computer_Submarine", 2);
+    }
 }
