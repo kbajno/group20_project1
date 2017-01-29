@@ -27,11 +27,11 @@ package edu.oregonstate.cs361.battleship;
     GridSquare get_end_square() {
         return this.end;
     } */
-}
+
 
 public class BattleshipModel {
 
-    private class GridSquare {
+    public class GridSquare {
         int Across;
         int Down;
 
@@ -40,12 +40,16 @@ public class BattleshipModel {
             this.Down = Down;
         } */
 
-        int[] get_coordinate_pair {
-            return [Across, Down];
+        int get_across() {
+            return this.Across;
+        }
+
+        int get_down() {
+            return this.Down;
         }
     }
 
-    private class Ship {
+    public class Ship {
         String name;
         int length;
         GridSquare start;
