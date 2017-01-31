@@ -6,6 +6,8 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 
+import java.util.Random;                    //For random placement of AI ships
+
 public class Main {
 
     public static void main(String[] args) {
@@ -21,23 +23,44 @@ public class Main {
     }
 
     //This function should return a new model
+
+    /* Modified by aoleson on 1/30/17.
+     * aoleson (1/30/17): This function is called when the page loads. It creates a new model of the game,
+     * randomly places the AI's ships on the board, and  stringifies the model with GSON and sends it back.
+     */
     static String newModel() {
 
-        //Instantiate model and GSON objects
+        //Instantiate model, GSON and random objects
         BattleshipModel modelObj = new BattleshipModel();
         Gson gson = new Gson();
+        Random rand = new Random();
+        int grid_max = 9;
+        int grid_min = 0;
 
-        //Set model attributes to starting values
+        //Proof of concept: Randomly place aircraftCarrier
+        int across = rand.nextInt((5 - grid_min) + 1) + grid_min;
+        int down = rand.nextInt((5 - grid_min) + 1) + grid_min;
+        //System.out.println(across);
+        //System.out.println(down);
+        int orientation = rand.nextInt((1 - 0) + 1) + 0;
+        //System.out.println(orientation);
+        modelObj.computer_aircraftCarrier.start.Across = across;
+        modelObj.computer_aircraftCarrier.start.Down = down;
+        if (orientation == 0) {         //0 is horizontal
+            modelObj.computer_aircraftCarrier.end.Across = across + 4;
+            modelObj.computer_aircraftCarrier.end.Down = down;
+        }
+        else {          //It was 1, which means vertical
+            modelObj.computer_aircraftCarrier.end.Across = across;
+            modelObj.computer_aircraftCarrier.end.Down = down + 4;
+        }
 
-        //Call randomization function
-
-        //Place AI ships
 
         //Convert to JSON object and to string
         String model = new String(gson.toJson(modelObj));
 
         //Confirm working (will comment out later)
-        System.out.println(model);
+        //System.out.println(model);
 
         //Return the model in string format (GSON needed)
         return model;

@@ -61,5 +61,10 @@ public class BattleshipModel {
         this.computer_cruiser = new Ship("Computer_Cruiser", 3);
         this.computer_destroyer = new Ship("Computer_Destroyer", 2);
         this.computer_submarine = new Ship("Computer_Submarine", 2);
+
+        this.playerHits = new int[0];
+        this.playerMisses = new int[0];
+        this.computerHits = new int[0];
+        this.computerMisses = new int[0];
     }
 }

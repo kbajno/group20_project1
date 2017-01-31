@@ -2,10 +2,9 @@ var gameModel;
 
 //This function will be called once the page is loaded.  It will get a new game model from the back end, and display it.
 $( document ).ready(function() {
-
   $.getJSON("model", function( json ) {
-    displayGameState(currModel);
     gameModel = json;
+    displayGameState(gameModel);
    });
 });
 
@@ -21,9 +20,8 @@ function placeShip() {
 
    //This will be called when the call is returned from the server.
    request.done(function( currModel ) {
-     displayGameState(currModel);
      gameModel = currModel;
-
+     displayGameState(gameModel);
    });
 
    // if there is a problem, and the back end does not respond, then an alert will be shown.
