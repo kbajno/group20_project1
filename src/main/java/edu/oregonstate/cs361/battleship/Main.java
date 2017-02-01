@@ -34,38 +34,20 @@ public class Main {
         BattleshipModel modelObj = new BattleshipModel();
         Gson gson = new Gson();
         Random rand = new Random();
-        int grid_max = 9;
-        int grid_min = 0;
 
-        //Proof of concept: Randomly place aircraftCarrier
-        int across = rand.nextInt((5 - grid_min) + 1) + grid_min;
-        int down = rand.nextInt((5 - grid_min) + 1) + grid_min;
-        //System.out.println(across);
-        //System.out.println(down);
-        int orientation = rand.nextInt((1 - 0) + 1) + 0;
-        //System.out.println(orientation);
-        modelObj.computer_aircraftCarrier.start.Across = across;
-        modelObj.computer_aircraftCarrier.start.Down = down;
-        if (orientation == 0) {         //0 is horizontal
-            modelObj.computer_aircraftCarrier.end.Across = across + 4;
-            modelObj.computer_aircraftCarrier.end.Down = down;
-        }
-        else {          //It was 1, which means vertical
-            modelObj.computer_aircraftCarrier.end.Across = across;
-            modelObj.computer_aircraftCarrier.end.Down = down + 4;
-        }
+        //Proof of concept: place aircraft carrier on the board.
+        modelObj.computer_aircraftCarrier.start.Across = 0;
+        modelObj.computer_aircraftCarrier.start.Down= 0;
+        modelObj.computer_aircraftCarrier.end.Across = 4;
+        modelObj.computer_aircraftCarrier.end.Down = 0;
 
 
         //Convert to JSON object and to string
         String model = new String(gson.toJson(modelObj));
 
-        //Confirm working (will comment out later)
-        //System.out.println(model);
-
         //Return the model in string format (GSON needed)
         return model;
 
-        //return "MODEL";
     }
 
     //This function should accept an HTTP request and deseralize it into an actual Java object.

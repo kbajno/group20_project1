@@ -37,7 +37,17 @@ class MainTest {
     public void testGetModel() {
         TestResponse res = request("GET", "/model");
         assertEquals(200, res.status);
-        assertEquals("MODEL",res.body);
+
+        String model = res.body;
+        Gson gson = new Gson();
+        BattleshipModel testModel = gson.fromJson(model, BattleshipModel.class);
+
+        assertEquals(0, testModel.computer_aircraftCarrier.start.Across);
+        assertEquals(0, testModel.computer_aircraftCarrier.start.Down);
+        assertEquals(4, testModel.computer_aircraftCarrier.end.Across);
+        assertEquals(0, testModel.computer_aircraftCarrier.end.Down);
+
+
     }
 
     @Test
