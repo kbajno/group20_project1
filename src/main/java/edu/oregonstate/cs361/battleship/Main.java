@@ -1,6 +1,7 @@
 package edu.oregonstate.cs361.battleship;
 
 import com.google.gson.Gson;
+import edu.oregonstate.cs361.battleship.BattleshipModel.*;
 import spark.Request;
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -75,12 +76,33 @@ public class Main {
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
     private static String placeShip(Request req) {
-        return "SHIP";
+        //Read in the request and parse it into an object
+        String path = req.contextPath();
+        String[] args = path.split("-");
+        
+        Gson gson = new Gson();
+        BattleshipModel model = gson.fromJson(req.queryMap("battleshipModel").toString(), BattleshipModel.class); 
+        //manipulate the object
+        Board board = model.getBoard();
+        ShipType type = ShipType.valueOf(args[1].toUpperCase());
+        ShipOrientation dir = ShipOrientation.valueOf(args[4].toUpperCase());
+
+        //view results
+        Boolean didPlace = board.placeShip(type, Integer.parseInt(args[2]), Integer.parseInt(args[3]), dir, Owner.PLAYER);
+        //if error, send error msg
+        if(didPlace)
+            return "Error";
+        //if no error, turn board back into JSON
+        String send = gson.toJson(model);
+        //return JSON
+        return send;
     }
 
     //Similar to placeShip, but with firing.
     private static String fireAt(Request req) {
         return null;
     }
+    
+    
 
 }
