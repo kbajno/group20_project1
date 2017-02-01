@@ -35,37 +35,32 @@ class MainTest {
 
     @Test
     public void testGetModel() {
-        TestResponse res = request("GET", "/model");
-        assertEquals(200, res.status);
+        int lowest_res = 5;
+        int highest_res = 5;
 
-        String model = res.body;
-        Gson gson = new Gson();
-        BattleshipModel testModel = gson.fromJson(model, BattleshipModel.class);
+        //Since the ships are placed randomly, we can't test if they're in a certain spot. So, we test that the randomization works.
+        for(int i = 0; i < 500; i++) {      //Request a new model five hundred times.
 
-        assertEquals(1, testModel.computer_aircraftCarrier.start.Across);
-        assertEquals(1, testModel.computer_aircraftCarrier.start.Down);
-        assertEquals(5, testModel.computer_aircraftCarrier.end.Across);
-        assertEquals(1, testModel.computer_aircraftCarrier.end.Down);
+            TestResponse res = request("GET", "/model");
+            assertEquals(200, res.status);      //Check that the status is "success" each time
 
-        assertEquals(1, testModel.computer_battleship.start.Across);
-        assertEquals(2, testModel.computer_battleship.start.Down);
-        assertEquals(4, testModel.computer_battleship.end.Across);
-        assertEquals(2, testModel.computer_battleship.end.Down);
+            //Convert the result into an object you can work with
+            String model = res.body;
+            Gson gson = new Gson();
+            BattleshipModel testModel = gson.fromJson(model, BattleshipModel.class);
 
-        assertEquals(1, testModel.computer_cruiser.start.Across);
-        assertEquals(3, testModel.computer_cruiser.start.Down);
-        assertEquals(3, testModel.computer_cruiser.end.Across);
-        assertEquals(3, testModel.computer_cruiser.end.Down);
+            //Figure out the lowest and highest values the down coordinate of aircraftCarrier takes over the 500 times it runs
+            if (testModel.computer_aircraftCarrier.start.Down > highest_res)
+                highest_res = testModel.computer_aircraftCarrier.start.Down;
+            if (testModel.computer_aircraftCarrier.start.Down < lowest_res)
+                lowest_res = testModel.computer_aircraftCarrier.start.Down;
 
-        assertEquals(1, testModel.computer_destroyer.start.Across);
-        assertEquals(4, testModel.computer_destroyer.start.Down);
-        assertEquals(2, testModel.computer_destroyer.end.Across);
-        assertEquals(4, testModel.computer_destroyer.end.Down);
+        }
 
-        assertEquals(1, testModel.computer_submarine.start.Across);
-        assertEquals(5, testModel.computer_submarine.start.Down);
-        assertEquals(2, testModel.computer_submarine.end.Across);
-        assertEquals(5, testModel.computer_submarine.end.Down);
+        //The actual check - ensure that 1 and 10 are the lowest and highest values possible
+        //This tests the "randomness" and ensures we wrote the RNG correctly, which means the ships do get placed randomly
+        assertEquals(1, lowest_res);
+        assertEquals(10, highest_res);
 
     }
 

@@ -30,40 +30,72 @@ public class Main {
      */
     static String newModel() {
 
-        //Instantiate model, GSON and random objects
+        //Instantiate model, GSON and random objects plus needed vars
         BattleshipModel modelObj = new BattleshipModel();
         Gson gson = new Gson();
         Random rand = new Random();
+        int grid_min = 1;
+        int grid_max = 10;
 
-        //Proof of concept: place aircraft carrier on the board. (length 5)
-        modelObj.computer_aircraftCarrier.start.Across = 1;
-        modelObj.computer_aircraftCarrier.start.Down= 1;
-        modelObj.computer_aircraftCarrier.end.Across = 5;
-        modelObj.computer_aircraftCarrier.end.Down = 1;
+        //Get random starting coordinates for each ship, making sure they're not the same
+        int air_across = rand.nextInt((6 - grid_min) + 1) + grid_min;       //Get random int in [1,6] (inclusive)
+        int air_down = rand.nextInt((10 - grid_min) + 1) + grid_min;
 
-        //Proof of concept: place battleship on the board. (length 4)
-        modelObj.computer_battleship.start.Across = 1;
-        modelObj.computer_battleship.start.Down= 2;
-        modelObj.computer_battleship.end.Across = 4;
-        modelObj.computer_battleship.end.Down = 2;
+        int bat_across = rand.nextInt((7 - grid_min) + 1) + grid_min;
+        int bat_down = rand.nextInt((10 - grid_min) + 1) + grid_min;
+        while (bat_down == air_down)                                                //If it's the same as one of the others, reroll random int
+            bat_down = rand.nextInt((10 - grid_min) + 1) + grid_min;
 
-        //Proof of concept: place cruiser on the board. (length 3)
-        modelObj.computer_cruiser.start.Across = 1;
-        modelObj.computer_cruiser.start.Down= 3;
-        modelObj.computer_cruiser.end.Across = 3;
-        modelObj.computer_cruiser.end.Down = 3;
+        int cru_across = rand.nextInt((8 - grid_min) + 1) + grid_min;
+        int cru_down = rand.nextInt((10 - grid_min) + 1) + grid_min;
+        while (cru_down == air_down || cru_down == bat_down)
+            cru_down = rand.nextInt((10 - grid_min) + 1) + grid_min;
 
-        //Proof of concept: place destroyer on the board. (length 2)
-        modelObj.computer_destroyer.start.Across = 1;
-        modelObj.computer_destroyer.start.Down= 4;
-        modelObj.computer_destroyer.end.Across = 2;
-        modelObj.computer_destroyer.end.Down = 4;
+        int des_across = rand.nextInt((9 - grid_min) + 1) + grid_min;
+        int des_down = rand.nextInt((10 - grid_min) + 1) + grid_min;
+        while (des_down == air_down || des_down == bat_down || des_down == cru_down)
+            des_down = rand.nextInt((10 - grid_min) + 1) + grid_min;
 
-        //Proof of concept: place aircraft carrier on the board. (length 2)
-        modelObj.computer_submarine.start.Across = 1;
-        modelObj.computer_submarine.start.Down= 5;
-        modelObj.computer_submarine.end.Across = 2;
-        modelObj.computer_submarine.end.Down = 5;
+        int sub_across = rand.nextInt((9 - grid_min) + 1) + grid_min;
+        int sub_down = rand.nextInt((10 - grid_min) + 1) + grid_min;
+        while (sub_down == air_down || sub_down == bat_down || sub_down == cru_down || sub_down == des_down)
+            sub_down = rand.nextInt((10 - grid_min) + 1) + grid_min;
+
+        /*System.out.println(air_down);
+        System.out.println(bat_down);
+        System.out.println(cru_down);
+        System.out.println(des_down);
+        System.out.println(sub_down);*/
+
+        //Place aircraft carrier on the board. (length 5)
+        modelObj.computer_aircraftCarrier.start.Across = air_across;
+        modelObj.computer_aircraftCarrier.start.Down= air_down;
+        modelObj.computer_aircraftCarrier.end.Across = (air_across + 4);
+        modelObj.computer_aircraftCarrier.end.Down = air_down;
+
+        //Place battleship on the board. (length 4)
+        modelObj.computer_battleship.start.Across = bat_across;
+        modelObj.computer_battleship.start.Down= bat_down;
+        modelObj.computer_battleship.end.Across = (bat_across + 3);
+        modelObj.computer_battleship.end.Down = bat_down;
+
+        //Place cruiser on the board. (length 3)
+        modelObj.computer_cruiser.start.Across = cru_across;
+        modelObj.computer_cruiser.start.Down= cru_down;
+        modelObj.computer_cruiser.end.Across = (cru_across + 2);
+        modelObj.computer_cruiser.end.Down = cru_down;
+
+        //Place destroyer on the board. (length 2)
+        modelObj.computer_destroyer.start.Across = des_across;
+        modelObj.computer_destroyer.start.Down= des_down;
+        modelObj.computer_destroyer.end.Across = (des_across + 1);
+        modelObj.computer_destroyer.end.Down = des_down;
+
+        //Place aircraft carrier on the board. (length 2)
+        modelObj.computer_submarine.start.Across = sub_across;
+        modelObj.computer_submarine.start.Down= sub_down;
+        modelObj.computer_submarine.end.Across = (sub_across + 1);
+        modelObj.computer_submarine.end.Down = sub_down;
 
         //Convert to JSON object and to string
         String model = new String(gson.toJson(modelObj));
