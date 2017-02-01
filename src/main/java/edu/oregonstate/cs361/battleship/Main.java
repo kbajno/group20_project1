@@ -24,7 +24,7 @@ public class Main {
 
     //This function should return a new model
 
-    /* Modified by aoleson on 1/30/17.
+    /* Modified by aoleson on 2/1/17.
      * aoleson (1/30/17): This function is called when the page loads. It creates a new model of the game,
      * randomly places the AI's ships on the board, and  stringifies the model with GSON and sends it back.
      */
@@ -60,12 +60,6 @@ public class Main {
         int sub_down = rand.nextInt((10 - grid_min) + 1) + grid_min;
         while (sub_down == air_down || sub_down == bat_down || sub_down == cru_down || sub_down == des_down)
             sub_down = rand.nextInt((10 - grid_min) + 1) + grid_min;
-
-        /*System.out.println(air_down);
-        System.out.println(bat_down);
-        System.out.println(cru_down);
-        System.out.println(des_down);
-        System.out.println(sub_down);*/
 
         //Place aircraft carrier on the board. (length 5)
         modelObj.computer_aircraftCarrier.start.Across = air_across;
