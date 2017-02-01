@@ -35,12 +35,35 @@ public class Main {
         Gson gson = new Gson();
         Random rand = new Random();
 
-        //Proof of concept: place aircraft carrier on the board.
-        modelObj.computer_aircraftCarrier.start.Across = 0;
-        modelObj.computer_aircraftCarrier.start.Down= 0;
-        modelObj.computer_aircraftCarrier.end.Across = 4;
-        modelObj.computer_aircraftCarrier.end.Down = 0;
+        //Proof of concept: place aircraft carrier on the board. (length 5)
+        modelObj.computer_aircraftCarrier.start.Across = 1;
+        modelObj.computer_aircraftCarrier.start.Down= 1;
+        modelObj.computer_aircraftCarrier.end.Across = 5;
+        modelObj.computer_aircraftCarrier.end.Down = 1;
 
+        //Proof of concept: place battleship on the board. (length 4)
+        modelObj.computer_battleship.start.Across = 1;
+        modelObj.computer_battleship.start.Down= 2;
+        modelObj.computer_battleship.end.Across = 4;
+        modelObj.computer_battleship.end.Down = 2;
+
+        //Proof of concept: place cruiser on the board. (length 3)
+        modelObj.computer_cruiser.start.Across = 1;
+        modelObj.computer_cruiser.start.Down= 3;
+        modelObj.computer_cruiser.end.Across = 3;
+        modelObj.computer_cruiser.end.Down = 3;
+
+        //Proof of concept: place destroyer on the board. (length 2)
+        modelObj.computer_destroyer.start.Across = 1;
+        modelObj.computer_destroyer.start.Down= 4;
+        modelObj.computer_destroyer.end.Across = 2;
+        modelObj.computer_destroyer.end.Down = 4;
+
+        //Proof of concept: place aircraft carrier on the board. (length 2)
+        modelObj.computer_submarine.start.Across = 1;
+        modelObj.computer_submarine.start.Down= 5;
+        modelObj.computer_submarine.end.Across = 2;
+        modelObj.computer_submarine.end.Down = 5;
 
         //Convert to JSON object and to string
         String model = new String(gson.toJson(modelObj));

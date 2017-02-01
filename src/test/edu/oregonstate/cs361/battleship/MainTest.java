@@ -42,11 +42,30 @@ class MainTest {
         Gson gson = new Gson();
         BattleshipModel testModel = gson.fromJson(model, BattleshipModel.class);
 
-        assertEquals(0, testModel.computer_aircraftCarrier.start.Across);
-        assertEquals(0, testModel.computer_aircraftCarrier.start.Down);
-        assertEquals(4, testModel.computer_aircraftCarrier.end.Across);
-        assertEquals(0, testModel.computer_aircraftCarrier.end.Down);
+        assertEquals(1, testModel.computer_aircraftCarrier.start.Across);
+        assertEquals(1, testModel.computer_aircraftCarrier.start.Down);
+        assertEquals(5, testModel.computer_aircraftCarrier.end.Across);
+        assertEquals(1, testModel.computer_aircraftCarrier.end.Down);
 
+        assertEquals(1, testModel.computer_battleship.start.Across);
+        assertEquals(2, testModel.computer_battleship.start.Down);
+        assertEquals(4, testModel.computer_battleship.end.Across);
+        assertEquals(2, testModel.computer_battleship.end.Down);
+
+        assertEquals(1, testModel.computer_cruiser.start.Across);
+        assertEquals(3, testModel.computer_cruiser.start.Down);
+        assertEquals(3, testModel.computer_cruiser.end.Across);
+        assertEquals(3, testModel.computer_cruiser.end.Down);
+
+        assertEquals(1, testModel.computer_destroyer.start.Across);
+        assertEquals(4, testModel.computer_destroyer.start.Down);
+        assertEquals(2, testModel.computer_destroyer.end.Across);
+        assertEquals(4, testModel.computer_destroyer.end.Down);
+
+        assertEquals(1, testModel.computer_submarine.start.Across);
+        assertEquals(5, testModel.computer_submarine.start.Down);
+        assertEquals(2, testModel.computer_submarine.end.Across);
+        assertEquals(5, testModel.computer_submarine.end.Down);
 
     }
 
