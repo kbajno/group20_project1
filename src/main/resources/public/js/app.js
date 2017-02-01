@@ -88,7 +88,7 @@ function displayShip(ship){
  startCoordDown = ship.start.Down;
  endCoordAcross = ship.end.Across;
  endCoordDown = ship.end.Down;
- console.log(startCoordAcross, startCoordDown, endCoordAcross, endCoordDown);
+ //console.log(startCoordAcross, startCoordDown, endCoordAcross, endCoordDown);
  if(startCoordAcross > 0){
     if(startCoordAcross == endCoordAcross){
         for (i = startCoordDown; i <= endCoordDown; i++) {
