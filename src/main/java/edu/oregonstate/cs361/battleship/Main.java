@@ -78,7 +78,7 @@ public class Main {
     private static String placeShip(Request req) {
         //Read in the request and parse it into an object
         String path = req.contextPath();
-        String[] args = path.split("-");
+        String[] args = path.split("/");
         
         Gson gson = new Gson();
         BattleshipModel model = gson.fromJson(req.queryMap("battleshipModel").toString(), BattleshipModel.class); 
