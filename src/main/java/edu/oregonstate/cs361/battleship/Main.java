@@ -100,7 +100,7 @@ public class Main {
     }
 
     //This function should accept an HTTP request and deseralize it into an actual Java object.
-    private static BattleshipModel getModelFromReq(Request req){
+    private static BattleshipModel getModelFromReq(Request req) {
         return null;
     }
 
@@ -110,8 +110,29 @@ public class Main {
     }
 
     //Similar to placeShip, but with firing.
-    private static String fireAt(Request req) {
+    private static String fireAt(Request req)
+    {
+        //code creates turns and uses the different methods to fire
+        int win = 0;
+        int turn = 0;
+        int horizontal = 0;
+        int vertical = 0;
+        Random num = new Random();
+        //while loop that will determine who's turn it is and what to do during their turn
+        while(win == 0){
+            if (turn == 0){ //this is the user's turn
+
+                turn++;
+            } else{ //this is the AI's turn
+                horizontal = (num.nextInt(10)) + 1;
+                vertical = (num.nextInt(10)) + 1;
+
+                turn--;
+            }
+            win = 1;
+        }
         return null;
     }
+
 
 }
