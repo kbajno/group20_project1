@@ -121,17 +121,18 @@ public class Main {
         //while loop that will determine who's turn it is and what to do during their turn
         while(win == 0){
             if (turn == 0){ //this is the user's turn
-
+                horizontal = req.attribute("row");
+                vertical = req.attribute("col");
                 turn++;
             } else{ //this is the AI's turn
                 horizontal = (num.nextInt(10)) + 1;
                 vertical = (num.nextInt(10)) + 1;
-
                 turn--;
             }
+            
             win = 1;
         }
-        return null;
+        return req.body();
     }
 
 
