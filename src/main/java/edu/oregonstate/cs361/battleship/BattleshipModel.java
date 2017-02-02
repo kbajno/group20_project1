@@ -4,6 +4,7 @@ package edu.oregonstate.cs361.battleship;
  * Skeleton created by michaelhilton on 1/26/17.
  * Fleshed out by leian7 on 1/28/17.
  */
+
 public class BattleshipModel {
 
     // Represents a specific square on the game board.

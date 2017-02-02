@@ -71,6 +71,13 @@ class MainTest {
         assertEquals("SHIP",res.body);
     }
 
+    @Test
+    //This test applies to user story 1 of our project code.
+    public void testFireAt() {
+        TestResponse res = request("POST", "/fire/1/1");
+        assertEquals(200, res.status);
+    }
+
     private TestResponse request(String method, String path) {
         try {
             URL url = new URL("http://localhost:4567" + path);
