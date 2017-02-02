@@ -281,11 +281,4 @@ class BattleshipModelTest {
 
     }
 
-    /*
-    @Test
-    public void test_arrays() {
-        // Test that arrays are accessible and editable through the game object.
-    }
-
-    */
 }
