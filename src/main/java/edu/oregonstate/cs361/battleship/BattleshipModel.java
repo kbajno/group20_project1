@@ -8,12 +8,12 @@ package edu.oregonstate.cs361.battleship;
 public class BattleshipModel {
 
     // Represents a specific square on the game board.
-    public class GridSquare {
+    public static class GridSquare {
         int Across;
         int Down;
     }
 
-    public class Ship {
+    public static class Ship {
         String name;
         int length;
         GridSquare start;
