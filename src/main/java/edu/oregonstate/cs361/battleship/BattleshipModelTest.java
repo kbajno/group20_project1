@@ -47,12 +47,51 @@ class BattleshipModelTest {
         assertEquals(game.computerMisses.length, 100);
     }
 
-    /*
+
     @Test
     public void test_ships() {
+
+        BattleshipModel.GridSquare testing_grid = new BattleshipModel.GridSquare();
+        testing_grid.Across = 55;
+        testing_grid.Down = 55;
+
         // Test that ships are accessible and editable through the game object
+        game.aircraftCarrier.name = "test_air";
+        game.aircraftCarrier.length = 10;
+        game.aircraftCarrier.start.Across = testing_grid.Across;
+        game.aircraftCarrier.start.Down = testing_grid.Down;
+        game.aircraftCarrier.end.Across = testing_grid.Across;
+        game.aircraftCarrier.end.Down = testing_grid.Down;
+        assertEquals(game.aircraftCarrier.name, "test_air");
+        assertEquals(game.aircraftCarrier.length, 10);
+        assertEquals(game.aircraftCarrier.start.Across, 55);
+        assertEquals(game.aircraftCarrier.start.Down, 55);
+        assertEquals(game.aircraftCarrier.end.Across, 55);
+        assertEquals(game.aircraftCarrier.end.Down, 55);
+
+        game.battleship.name = "test_bat";
+        assertEquals(game.battleship.name, "test_bat");
+        game.cruiser.name = "test_cru";
+        assertEquals(game.cruiser.name, "test_cru");
+        game.destroyer.name = "test_des";
+        assertEquals(game.destroyer.name, "test_des");
+        game.submarine.name = "test_sub";
+        assertEquals(game.submarine.name, "test_sub");
+
+        game.computer_aircraftCarrier.name = "test_air";
+        assertEquals(game.computer_aircraftCarrier.name, "test_air");
+        game.computer_battleship.name = "test_bat";
+        assertEquals(game.computer_battleship.name, "test_bat");
+        game.computer_cruiser.name = "test_cru";
+        assertEquals(game.computer_cruiser.name, "test_cru");
+        game.computer_destroyer.name = "test_des";
+        assertEquals(game.computer_destroyer.name, "test_des");
+        game.computer_submarine.name = "test_sub";
+        assertEquals(game.computer_submarine.name, "test_sub");
+
     }
 
+    /*
     @Test
     public void test_squares() {
         // Test that squares are accessible and editable through the game object.
