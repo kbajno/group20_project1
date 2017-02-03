@@ -101,11 +101,170 @@ public class Main {
 
     //This function should accept an HTTP request and deseralize it into an actual Java object.
     private static BattleshipModel getModelFromReq(Request req) {
-        return null;
+        Gson gson = new Gson();
+        BattleshipModel gameState = gson.fromJson(req.body(), BattleshipModel.class);
+        return gameState;
     }
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
     private static String placeShip(Request req) {
+        System.out.println("Hello World!");
+        System.out.println(req.params("type").toString());
+
+        //Take JSON and convert to GSON
+        BattleshipModel game = getModelFromReq(req);
+     //   game = getModelFromReq(req);
+        //game = new BattleshipModel();
+        Gson gson = new Gson();
+        BattleshipModel.Ship[] user_ships = {game.aircraftCarrier, game.battleship, game.cruiser, game.destroyer, game.submarine};
+
+
+        /*
+        //Takes user's request and makes variables from it
+        String shipname = req.attribute("id");
+        int across = req.attribute("row");
+        int down = req.attribute("col");
+        String orientation = req.attribute("orientation");
+        int length = 0;
+        Boolean isHoz = false;
+/*
+        if(orientation == "horizontal"){
+            isHoz = true;
+        }
+
+        //Compares the shipname to all existing ships on the board to check if already placed
+        switch(shipname) {
+            case "aircraftCarrier":
+                length = 5;
+                if(game.aircraftCarrier.start != null)
+                    return null;
+                break;
+            case "battleship":
+                length = 4;
+                if(game.battleship.start != null)
+                    return null;
+                break;
+            case "cruiser":
+                length = 3;
+                if(game.cruiser.start != null)
+                    return null;
+                break;
+            case "destroyer":
+                length = 2;
+                if(game.destroyer.start != null)
+                    return null;
+                break;
+            case "submarine":
+                length = 2;
+                if(game.submarine.start != null)
+                    return null;
+                break;
+        }
+
+        //create blank array that simulates the board
+        int[][] boardarr = new int[10][10];
+        for (int i = 0; i < 10; i++) {
+            for (int a = 0; a < 10; a++)
+                boardarr[i][a] = 0;
+        }
+        //look at the info for the current game state, and place boards according to where they are located
+        //spaces that are 0 are empty, spaces that have a 1 are full
+        for (BattleshipModel.Ship ship : user_ships){
+            if (ship != null){
+                if(ship.start.Across == ship.end.Across){
+                    //horizontal
+                    for (int i = 0; i < ship.length; i++){
+                        boardarr[ship.start.Down][ship.start.Across+i] = 1;
+                    }
+                } else {
+                    //vertical
+                    for (int i = 0; i < ship.length; i++){
+                        boardarr[ship.start.Down+i][ship.start.Across] = 1;
+                    }
+                }
+            }
+        }
+
+        //compare where the user wants to go to the board
+        if(isHoz){
+            //player wants to put it hoz
+            for(int i = 0; i < length; i++){
+                if(boardarr[down][across + 1] == 1){
+                    return null;
+                }
+            }
+        } else {
+            //they want it vertical
+            for(int i = 0; i < length; i++){
+                if(boardarr[down + 1][across] == 1){
+                    return null;
+                }
+            }
+        }
+        //if the ship can not fit, return null
+        //if the ship can fit,
+        //place it into the game state, convert it back to JSON, and return it
+        switch(shipname) {
+            case "aircraftCarrier":
+                game.aircraftCarrier.start.Across = across;
+                game.aircraftCarrier.start.Down = down;
+                if(isHoz) {
+                    game.aircraftCarrier.end.Across = across + length;
+                    game.aircraftCarrier.end.Down = down;
+                }
+                else {
+                    game.aircraftCarrier.end.Across = across;
+                    game.aircraftCarrier.end.Down = down + length;
+                }
+                break;
+            case "battleship":
+                game.battleship.start.Across = across;
+                game.battleship.start.Down = down;
+                if(isHoz){
+                    game.battleship.end.Across = across + length;
+                    game.battleship.end.Down = down;
+                } else {
+                    game.battleship.end.Across = across;
+                    game.battleship.end.Down = down + length;
+                }
+                break;
+            case "cruiser":
+                game.cruiser.start.Across = across;
+                game.cruiser.start.Down = down;
+                if(isHoz){
+                    game.cruiser.end.Across = across + length;
+                    game.cruiser.end.Down = down;
+                } else {
+                    game.cruiser.end.Across = across;
+                    game.cruiser.end.Down = down + length;
+                }
+                break;
+            case "destroyer":
+                game.destroyer.start.Across = across;
+                game.destroyer.start.Down = down;
+                if(isHoz){
+                    game.destroyer.end.Across = across + length;
+                    game.destroyer.end.Down = down;
+                } else {
+                    game.destroyer.end.Across = across;
+                    game.destroyer.end.Down = down + length;
+                }
+            case "submarine":
+                game.submarine.start.Across = across;
+                game.submarine.start.Down = down;
+                if(isHoz){
+                    game.submarine.end.Across = across + length;
+                    game.submarine.end.Down = down;
+                } else {
+                    game.submarine.end.Across = across;
+                    game.submarine.end.Down = down + length;
+                }
+                break;
+        }
+
+        //ship is now in the board, serialize and return state
+        String ret = gson.toJson(game);
+        return ret; */
         return "SHIP";
     }
 
