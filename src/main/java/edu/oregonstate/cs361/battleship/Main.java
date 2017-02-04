@@ -2,6 +2,8 @@ package edu.oregonstate.cs361.battleship;
 
 import com.google.gson.Gson;
 import spark.Request;
+import spark.Spark.*;
+
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
@@ -29,8 +31,7 @@ public class Main {
      * randomly places the AI's ships on the board, and  stringifies the model with GSON and sends it back.
      */
     static String newModel() {
-
-        //Instantiate model, GSON and random objects plus needed vars
+         //Instantiate model, GSON and random objects plus needed vars
         BattleshipModel modelObj = new BattleshipModel();
         Gson gson = new Gson();
         Random rand = new Random();
@@ -92,8 +93,7 @@ public class Main {
         modelObj.computer_submarine.end.Down = sub_down;
 
         //Convert to JSON object and to string
-        String model = new String(gson.toJson(modelObj));
-
+        String model = gson.toJson(modelObj);
         //Return the model in string format (GSON needed)
         return model;
 
@@ -102,62 +102,52 @@ public class Main {
     //This function should accept an HTTP request and deseralize it into an actual Java object.
     private static BattleshipModel getModelFromReq(Request req) {
         Gson gson = new Gson();
-        BattleshipModel gameState = gson.fromJson(req.body(), BattleshipModel.class);
+        String json = req.body();
+        BattleshipModel gameState = gson.fromJson(json, BattleshipModel.class);
         return gameState;
     }
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
     private static String placeShip(Request req) {
-        System.out.println("Hello World!");
-        System.out.println(req.params("type").toString());
 
-        //Take JSON and convert to GSON
+        //Gets model and converts
         BattleshipModel game = getModelFromReq(req);
-     //   game = getModelFromReq(req);
-        //game = new BattleshipModel();
         Gson gson = new Gson();
+
+        //Creates array of users_ships to check whats on the board
         BattleshipModel.Ship[] user_ships = {game.aircraftCarrier, game.battleship, game.cruiser, game.destroyer, game.submarine};
 
-
-        /*
         //Takes user's request and makes variables from it
-        String shipname = req.attribute("id");
-        int across = req.attribute("row");
-        int down = req.attribute("col");
-        String orientation = req.attribute("orientation");
+        String shipname = req.params("id");
+        String arow = req.params("row");
+        int across = Integer.parseInt(arow);
+        String dcol = req.params("col");
+        int down = Integer.parseInt(dcol);
+        String orientation = req.params("orientation");
         int length = 0;
         Boolean isHoz = false;
-/*
-        if(orientation == "horizontal"){
+
+        if (orientation.equals("horizontal")){
             isHoz = true;
         }
 
         //Compares the shipname to all existing ships on the board to check if already placed
+        System.out.println(shipname);
         switch(shipname) {
             case "aircraftCarrier":
                 length = 5;
-                if(game.aircraftCarrier.start != null)
-                    return null;
                 break;
             case "battleship":
                 length = 4;
-                if(game.battleship.start != null)
-                    return null;
                 break;
             case "cruiser":
                 length = 3;
-                if(game.cruiser.start != null)
-                    return null;
                 break;
             case "destroyer":
                 length = 2;
-                if(game.destroyer.start != null)
-                    return null;
                 break;
             case "submarine":
                 length = 2;
-                if(game.submarine.start != null)
-                    return null;
                 break;
         }
 
@@ -167,6 +157,7 @@ public class Main {
             for (int a = 0; a < 10; a++)
                 boardarr[i][a] = 0;
         }
+
         //look at the info for the current game state, and place boards according to where they are located
         //spaces that are 0 are empty, spaces that have a 1 are full
         for (BattleshipModel.Ship ship : user_ships){
@@ -190,14 +181,14 @@ public class Main {
             //player wants to put it hoz
             for(int i = 0; i < length; i++){
                 if(boardarr[down][across + 1] == 1){
-                    return null;
+
                 }
             }
         } else {
             //they want it vertical
             for(int i = 0; i < length; i++){
                 if(boardarr[down + 1][across] == 1){
-                    return null;
+
                 }
             }
         }
@@ -262,10 +253,10 @@ public class Main {
                 break;
         }
 
-        //ship is now in the board, serialize and return state
+        //ship is now: in the board, serialize and return state
         String ret = gson.toJson(game);
-        return ret; */
-        return "SHIP";
+        System.out.println(ret);
+        return ret;
     }
 
     //Similar to placeShip, but with firing.
@@ -293,6 +284,5 @@ public class Main {
         }
         return req.body();
     }
-
 
 }
